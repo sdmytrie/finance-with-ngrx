@@ -1,0 +1,51 @@
+<div class="background"></div>
+<div class="container">
+  <div class="header">
+
+    <div class="navbar">
+
+      <ul class="navbar__items">
+        <li class="navbar__item">
+          <a routerLink="/"
+             style="cursor: pointer">
+            <mat-icon style="line-height: 3rem;">home</mat-icon>
+          </a>
+        </li>
+
+        <li class="navbar__item"
+            *ngIf="isLoggedIn$|async">
+          <a routerLink="/accounts"
+             style="cursor: pointer">
+            Accounts
+          </a>
+        </li>
+      </ul>
+
+      <ul class="navbar__items">
+        <li class="navbar__item"
+            *ngIf="isLoggedIn$|async">
+          <span>{{ (profile$|async)?.first_name }} {{ (profile$|async)?.last_name }}</span>
+        </li>
+
+        <li class="navbar__item"
+            *ngIf="isLoggedIn$|async">
+          <a (click)="logout()"
+             style="cursor: pointer">
+            Logout
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+  <div class="sidebar">
+    sidebar
+  </div>
+  <div class="load">
+    <!-- loading -->
+  </div>
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+</div>

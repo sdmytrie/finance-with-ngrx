@@ -1,0 +1,73 @@
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-rows: fit-content(1.5rem) fit-content(0.4rem) auto;
+  grid-template-columns: 1fr 4fr;
+  grid-template-areas:
+    "header header"
+    "load load"
+    "sidebar main";
+}
+
+.header {
+  grid-area: header;
+  color: white;
+  background-color: var(--secondary-bg-color);
+}
+
+.sidebar {
+  grid-area: sidebar;
+  color: black;
+  background-color: var(--main-bg-color);
+}
+
+.load {
+  grid-area: load;
+  min-height: 0.4rem;
+  background-color: transparent;
+  background-color: green;
+}
+
+.main {
+  grid-area: main;
+  background-color: var(--main-bg-color);
+}
+
+.navbar {
+  margin: 0 0;
+  height: 3rem;
+  background-color: var(--secondary-bg-color);
+  display: flex;
+  justify-content: space-between;
+
+  /* width: 100%; */
+  /* border-radius: 5px; */
+}
+
+.navbar__items {
+  margin: 0;
+  padding: 0;
+  line-height: 3rem;
+  list-style: none;
+  display: flex;
+  /* justify-content: space-between; */
+}
+
+.navbar__item {
+  margin: 0 1rem;
+  color: white;
+}
+
+.navbar__item a,
+.mobile-nav__item a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.2rem 0;
+}
+
+.navbar__item a:hover,
+.navbar__item a:active {
+  color: white;
+  border-bottom: 5px solid white;
+}
