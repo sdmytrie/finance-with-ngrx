@@ -24,8 +24,7 @@
 .load {
   grid-area: load;
   min-height: 0.4rem;
-  background-color: transparent;
-  background-color: green;
+  background-color: var(--main-bg-color);
 }
 
 .main {

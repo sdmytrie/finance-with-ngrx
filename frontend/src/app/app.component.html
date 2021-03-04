@@ -43,7 +43,9 @@
     sidebar
   </div>
   <div class="load">
-    <!-- loading -->
+    <div *ngIf="loading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
   </div>
   <div class="main">
     <router-outlet></router-outlet>

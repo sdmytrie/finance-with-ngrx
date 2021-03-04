@@ -14,3 +14,8 @@ export const getProfile = createSelector(
   selectAuthState,
   (auth) => auth.user?.payload
 );
+
+export const getJWT = createSelector(
+  selectAuthState,
+  (auth) => auth.user?.jwt_token
+);

@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '../auth/auth.guard';
 
 import { AccountsComponent } from './home/accounts.component';
+import { AccountsResolver } from './services/accounts.resolver';
 
-// const routes: Routes = [
-//   { path: '', component: AccountsComponent, canActivate: [AuthGuard] },
-// ];
 const routes: Routes = [
-  { path: '', component: AccountsComponent },
+  {
+    path: '',
+    component: AccountsComponent,
+    resolve: {
+      accounts: AccountsResolver,
+    },
+  },
 ];
 
 @NgModule({
