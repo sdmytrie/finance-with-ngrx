@@ -40,7 +40,12 @@
   /* outline: solid 1px black; */
   flex-wrap: wrap;
   align-items: baseline;
+  justify-content: space-between;
   /* justify-content: space-between; */
+}
+
+.account-item-action {
+  text-align: right;
 }
 
 .account-item > * {

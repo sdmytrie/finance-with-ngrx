@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { defaultDialogConfig } from 'src/app/shared/default-dialog-config';
 import { Account } from '../model/account';
 import { AccountEntityService } from '../services/account-entity.service';
 import { EditAccountDialogComponent } from '../edit-account-dialog/edit-account-dialog.component';
+import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
 
 @Component({
   selector: 'app-accounts',
@@ -36,7 +37,17 @@ export class AccountsComponent implements OnInit {
     this.dialog.open(EditAccountDialogComponent, dialogConfig);
   }
 
-  onDelete(id: string): void {
-    this.accountsService.delete(id);
+  onDelete(account: Account): void {
+    // this.accountsService.delete(id);
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = account;
+
+    const dialogRef = this.dialog.open(
+      DeleteAccountDialogComponent,
+      dialogConfig
+    );
   }
 }

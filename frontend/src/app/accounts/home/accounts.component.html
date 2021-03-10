@@ -9,12 +9,19 @@
   <div class="account-content">
     <ng-container *ngFor="let account of (accounts$|async)">
       <div class="account-item">
-        <p>{{ account.name }}</p>
-        <p>{{account.bic}} / {{ account.iban }}</p>
-        <p>{{account.balance}}</p>
-        <button mat-button>
-          <mat-icon (click)="onDelete(account._id)">delete</mat-icon>
-        </button>
+        <div class="account-item">
+          <p>{{ account.name }}</p>
+          <p>{{account.bic}} / {{ account.iban }}</p>
+          <p>{{account.balance}}</p>
+        </div>
+        <div class="account-item-action">
+          <button mat-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-button>
+            <mat-icon (click)="onDelete(account)">delete</mat-icon>
+          </button>
+        </div>
       </div>
     </ng-container>
   </div>

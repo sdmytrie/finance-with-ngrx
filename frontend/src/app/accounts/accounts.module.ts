@@ -12,9 +12,14 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { AccountsDataService } from './services/accounts-data.service';
 import { EditAccountDialogComponent } from './edit-account-dialog/edit-account-dialog.component';
+import { DeleteAccountDialogComponent } from './delete-account-dialog/delete-account-dialog.component';
 
 @NgModule({
-  declarations: [AccountsComponent, EditAccountDialogComponent],
+  declarations: [
+    AccountsComponent,
+    EditAccountDialogComponent,
+    DeleteAccountDialogComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,

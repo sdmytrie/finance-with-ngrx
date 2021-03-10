@@ -1,0 +1,19 @@
+<div class="main">
+  <mat-card>
+    <mat-card-content>
+      <h2>Etes-vous sûr de vouloir supprimer ce compte ?</h2>
+      <h2>{{ account.name }}</h2>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button
+              color="warn"
+              (click)="onDelete(account)">DELETE</button>
+      &nbsp;
+      <button mat-raised-button
+              color="primary"
+              (click)="onCancel()">CANCEL</button>
+    </mat-card-actions>
+
+  </mat-card>
+</div>
