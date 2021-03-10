@@ -18,4 +18,14 @@ export class AccountsDataService extends DefaultDataService<Account> {
       .get('/api/accounts')
       .pipe(map((res: any) => Object.values(res.data) as Account[]));
   }
+
+  add(account: Account): Observable<Account> {
+    return this.http
+      .post<Account>('/api/accounts', account);
+  }
+
+  delete(id: string): Observable<string> {
+    return this.http
+      .delete<string>('/api/accounts/' + id);
+  }
 }

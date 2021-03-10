@@ -8,9 +8,9 @@ import {
 } from 'class-validator';
 
 export class AccountDto {
-  @IsString()
-  @IsMongoId()
-  readonly _id: string;
+  // @IsString()
+  // @IsMongoId()
+  // _id: string;
 
   @IsString({ message: 'name must be a string' })
   @MaxLength(30)
@@ -38,7 +38,7 @@ export class AccountDto {
   @IsString()
   quality: string;
 
-  @IsString()
-  @IsMongoId()
-  user_id: string;
+  // @IsString()
+  // @IsMongoId()
+  // user_id: string;
 }

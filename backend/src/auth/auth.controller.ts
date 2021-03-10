@@ -8,7 +8,7 @@ export class AuthController {
   @Post('/api/login')
   async login(
     @Body('username') username: string,
-    @Body('password') password: string
+    @Body('password') password: string,
   ): Promise<any> {
     return this.authService.login(username, password);
   }

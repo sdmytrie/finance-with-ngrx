@@ -1,9 +1,13 @@
 import {
+  Body,
   Controller,
   Get,
   NotFoundException,
   Param,
+  Post,
+  Headers,
   UseGuards,
+  Delete,
 } from '@nestjs/common';
 
 import { AccountsService } from './accounts.service';
@@ -16,8 +20,10 @@ export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Get()
-  async findAll(): Promise<{ data: Account[] }> {
-    return this.accountsService.findAll().then((accounts) => {
+  async findAll(
+    @Headers('authorization') jwt: string,
+  ): Promise<{ data: Account[] }> {
+    return this.accountsService.findAll(jwt).then((accounts) => {
       return { data: accounts };
     });
   }
@@ -29,5 +35,21 @@ export class AccountsController {
       throw new NotFoundException('Could not found account.');
     }
     return account;
+  }
+
+  @Post()
+  async create(
+    @Body() data: Account,
+    @Headers('authorization') jwt: string,
+  ): Promise<Account> {
+    const account = await this.accountsService.create(data, jwt);
+
+    return account;
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<string> {
+    const count = await this.accountsService.delete(id);
+    return count;
   }
 }

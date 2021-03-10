@@ -9,6 +9,7 @@ import { UsersService } from '../users/users.service';
 import { environment } from '../environments/environment';
 
 interface Payload {
+  _id: string;
   email: string;
   username: string;
   first_name: string;
@@ -20,7 +21,7 @@ export class AuthService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     private readonly jwtService: JwtService,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
   ) {}
 
   private async validate(username: string): Promise<User> {
@@ -29,8 +30,8 @@ export class AuthService {
 
   public async login(
     username: string,
-    password: string
-  ): Promise<{ jwt_token: string, payload: Payload, expiresIn: number }> {
+    password: string,
+  ): Promise<{ jwt_token: string; payload: Payload; expiresIn: number }> {
     const user = await this.validate(username);
 
     if (!user) {
@@ -43,6 +44,7 @@ export class AuthService {
     }
 
     const payload: Payload = {
+      _id: user._id,
       email: user.email,
       username: username,
       first_name: user.first_name,
@@ -53,7 +55,7 @@ export class AuthService {
     return {
       jwt_token: accessToken,
       expiresIn: environment.expiresIn,
-      payload
+      payload,
     };
   }
 }

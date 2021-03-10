@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountsComponent } from './home/accounts.component';
 import {
   EntityDataService,
@@ -10,10 +11,17 @@ import {
 import { AngularMaterialModule } from '../angular-material.module';
 import { AccountsRoutingModule } from './accounts-routing.module';
 import { AccountsDataService } from './services/accounts-data.service';
+import { EditAccountDialogComponent } from './edit-account-dialog/edit-account-dialog.component';
 
 @NgModule({
-  declarations: [AccountsComponent],
-  imports: [CommonModule, AngularMaterialModule, AccountsRoutingModule],
+  declarations: [AccountsComponent, EditAccountDialogComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularMaterialModule,
+    AccountsRoutingModule,
+  ],
   providers: [],
 })
 export class AccountsModule {

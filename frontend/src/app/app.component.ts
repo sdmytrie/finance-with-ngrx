@@ -14,14 +14,7 @@ import { AccountEntityService } from './accounts/services/account-entity.service
 import { login, logout } from './auth/auth.actions';
 import { isLoggedIn, isLoggedOut, getProfile } from './auth/auth.selectors';
 import { AppState } from './reducers';
-import { Account } from './accounts/model/account';
-
-interface Profile {
-  username: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-}
+import { Profile } from './shared/profile.model';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +24,7 @@ interface Profile {
 export class AppComponent implements OnInit {
   title = 'frontend';
   loading = true;
+  private tokenExpirationTimer: any;
 
   isLoggedIn$!: Observable<boolean>;
   isLoggedOut$!: Observable<boolean>;
@@ -44,9 +38,21 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const user = localStorage.getItem('user');
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
 
     if (user) {
-      this.store.dispatch(login({ user: JSON.parse(user) }));
+      const jwt = JSON.parse(user).jwt_token;
+      const tokenParts = jwt.split(/\./);
+      const tokenDecoded = JSON.parse(window.atob(tokenParts[1]));
+      if(tokenDecoded.exp * 1000 < new Date().getTime()) {
+        this.logout();
+      } else {
+        this.autoLogout(tokenDecoded.exp * 1000 - new Date().getTime());
+        this.store.dispatch(login({ user: JSON.parse(user) }));
+      }
     }
 
     this.router.events.subscribe((event) => {
@@ -77,9 +83,20 @@ export class AppComponent implements OnInit {
       .pipe(map((data) => data as Profile));
   }
 
+  autoLogout(expirationDuration: number): void {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
   logout(): void {
     this.store.dispatch(logout());
     this.accountsService.clearCache();
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+
     this.router.navigateByUrl('/login');
   }
 }
