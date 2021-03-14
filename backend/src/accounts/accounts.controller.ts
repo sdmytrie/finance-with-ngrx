@@ -8,6 +8,7 @@ import {
   Headers,
   UseGuards,
   Delete,
+  Put,
 } from '@nestjs/common';
 
 import { AccountsService } from './accounts.service';
@@ -43,6 +44,16 @@ export class AccountsController {
     @Headers('authorization') jwt: string,
   ): Promise<Account> {
     const account = await this.accountsService.create(data, jwt);
+
+    return account;
+  }
+
+  @Put(':id')
+  async update(
+    @Body() data: Account,
+    @Param('id') id: string,
+  ): Promise<Account> {
+    const account = await this.accountsService.update(data, id);
 
     return account;
   }

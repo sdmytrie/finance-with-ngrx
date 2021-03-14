@@ -16,7 +16,7 @@
         </div>
         <div class="account-item-action">
           <button mat-button>
-            <mat-icon>edit</mat-icon>
+            <mat-icon (click)="onEdit(account)">edit</mat-icon>
           </button>
           <button mat-button>
             <mat-icon (click)="onDelete(account)">delete</mat-icon>

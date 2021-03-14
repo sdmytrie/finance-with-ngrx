@@ -37,6 +37,18 @@ export class AccountsComponent implements OnInit {
     this.dialog.open(EditAccountDialogComponent, dialogConfig);
   }
 
+  onEdit(account: Account): void {
+    const dialogConfig = defaultDialogConfig();
+
+    dialogConfig.data = {
+      dialogTitle: 'Edit Account',
+      mode: 'update',
+      account: account,
+    };
+
+    this.dialog.open(EditAccountDialogComponent, dialogConfig);
+  }
+
   onDelete(account: Account): void {
     // this.accountsService.delete(id);
     const dialogConfig = new MatDialogConfig();

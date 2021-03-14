@@ -22,6 +22,12 @@ export class AccountsService {
     return createdAccount.toObject({ versionKey: false });
   }
 
+  async update(updatedAccount: Account, id: string): Promise<Account> {
+    await this.accountModel.updateOne({ _id: id }, updatedAccount);
+
+    return updatedAccount;
+  }
+
   findAll(jwt: string): Promise<Account[]> {
     const tokenDecoded: any = this.jwtService.decode(jwt);
 
